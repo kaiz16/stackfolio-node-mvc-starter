@@ -1,0 +1,22 @@
+[
+  {
+    "singular": "User",
+    "plural": "Users",
+    "fields": [
+      "id:uuid!",
+      "firstName:String!",
+      "lastName:String",
+      "email:String!",
+      "phone:String!",
+      "avatarUrl:String",
+      "bio:String",
+      "isDeleted:Boolean",
+      "role:TypesUserRolesEnum!",
+      "suspended:Boolean",
+      "lastNameChangedAt:date",
+      "moderatorId:uuid",
+      "createdAt:timestamptz",
+      "updatedAt:timestamptz"
+    ]
+  }
+]

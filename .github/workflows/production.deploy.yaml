@@ -1,0 +1,75 @@
+on:
+  push:
+    branches: [main]
+
+name: Stackfolio Node MVC Starter - Production
+env:
+  SERVICE: stackfolio-node-mvc-prod
+  REGION: australia-southeast1 # Change this to your preferred region
+  PORT: 8080 # Cloud Run port
+  # The name of the Artifact Registry repository where the Docker image will be stored.
+  # Make sure to create this repository in Artifact Registry before running the workflow.
+  # Link: https://console.cloud.google.com/artifacts/create-repo
+  REPOSITORY: stackfolio
+  GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
+  GCP_SA_EMAIL: ${{ secrets.GCP_SA_EMAIL }}
+  NODE_ENV: production # Set the environment to production
+  SUPABASE_URL: ${{ secrets.ENV_SUPABASE_URL_PROD }} # Your Supabase project URL
+  SUPABASE_ANON_KEY: ${{ secrets.ENV_SUPABASE_ANON_KEY_PROD }} # Your Supabase anon key
+  SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.ENV_SUPABASE_SERVICE_ROLE_KEY_PROD }} # Your Supabase service role key
+  RESEND_API_KEY: ${{ secrets.ENV_RESEND_API_KEY_PROD }} # Your Resend API key or any other email service API key
+  HASURA_ENDPOINT: ${{ secrets.ENV_HASURA_ENDPOINT_PROD }} # Your Hasura endpoint
+  HASURA_ADMIN_SECRET: ${{ secrets.ENV_HASURA_ADMIN_SECRET_PROD }} # Your Hasura admin secret
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0.2.0
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Authorize Docker push to Artifact Registry
+        run: gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev
+
+      - name: Build Docker Image
+        run: |-
+          docker build \
+          --build-arg NODE_ENV=${{ env.NODE_ENV }} \
+          --build-arg SUPABASE_URL=${{ env.SUPABASE_URL }} \
+          --build-arg SUPABASE_ANON_KEY=${{ env.SUPABASE_ANON_KEY }} \
+          --build-arg SUPABASE_SERVICE_ROLE_KEY=${{ env.SUPABASE_SERVICE_ROLE_KEY }} \
+          --build-arg RESEND_API_KEY=${{ env.RESEND_API_KEY }} \
+          --build-arg HASURA_ENDPOINT=${{ env.HASURA_ENDPOINT }} \
+          --build-arg HASURA_ADMIN_SECRET=${{ env.HASURA_ADMIN_SECRET }} \
+          -t ${{ env.REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE }}:${{ github.sha }} \
+
+      - name: Push to Artifact Registry
+        run: |-
+          docker push ${{ env.REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE }}:${{  github.sha }}
+
+      - name: Deploy to Cloud Run
+        run: |-
+          gcloud run deploy ${{ env.SERVICE }} \
+          --image ${{ env.REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE }}:${{  github.sha }} \
+          --port ${{env.PORT}} \
+          --region ${{ env.REGION }} \
+          --memory 512Mi \
+          --min-instances 0 \
+          --quiet \
+          --platform "managed" \
+          --service-account ${{ env.GCP_SA_EMAIL }} \
+          --allow-unauthenticated \
+          --set-env-vars "NODE_ENV=${{ env.NODE_ENV }}" \
+          --set-env-vars "SUPABASE_URL=${{ env.SUPABASE_URL }}" \
+          --set-env-vars "SUPABASE_ANON_KEY=${{ env.SUPABASE_ANON_KEY }}" \
+          --set-env-vars "SUPABASE_SERVICE_ROLE_KEY=${{ env.SUPABASE_SERVICE_ROLE_KEY }}" \
+          --set-env-vars "RESEND_API_KEY=${{ env.RESEND_API_KEY }}" \
+          --set-env-vars "HASURA_ENDPOINT=${{ env.HASURA_ENDPOINT }}" \
+          --set-env-vars "HASURA_ADMIN_SECRET=${{ env.HASURA_ADMIN_SECRET }}"

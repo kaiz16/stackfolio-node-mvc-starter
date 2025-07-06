@@ -1,0 +1,17 @@
+version: '3.6'
+services:
+  stackfolio-api-dev:
+    container_name: 'stackfolio-api-dev'
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      args:
+        - PORT=9000
+    image: stackfolio-api-dev
+    command: npm run start
+    ports:
+      - '9000'
+    network_mode: host
+    restart: always # if fail (REASON - OOM or etc) restart always
+    env_file:
+      - .env.development

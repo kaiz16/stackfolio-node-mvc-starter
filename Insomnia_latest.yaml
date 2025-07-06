@@ -1,0 +1,672 @@
+type: collection.insomnia.rest/5.0
+name: Stackfolio Node MVC Starter
+meta:
+  id: wrk_52e4e684c3af45159b9ecb3898683b73
+  created: 1751769976189
+  modified: 1751769976189
+  description: ""
+collection:
+  - name: Auth
+    meta:
+      id: fld_29bd91fdce08481d82aea7a3856c766a
+      created: 1751769976201
+      modified: 1751769976201
+      sortKey: -1672559283579.5078
+      description: ""
+    children:
+      - url: "{{ _.SERVER_ENDPOINT }}/auth/register"
+        name: Register
+        meta:
+          id: req_4a8d4a5a374a40a39f4ec88a3f540591
+          created: 1751769976202
+          modified: 1751772267995
+          isPrivate: false
+          description: ""
+          sortKey: -1727090382522.289
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "firstName": "John",
+              "lastName": "Doe",
+              "email": "johndoe@jdoe.co",
+              "phone": "0412345678",
+              "password": "TestUser123*",
+              "role": "USER" {# USER | MODERATOR | ADMIN #}
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.SERVER_ENDPOINT }}/auth/login"
+        name: Login
+        meta:
+          id: req_ab2c0af427f64aaeae59ee89f6ae2a75
+          created: 1751769976204
+          modified: 1751772202169
+          isPrivate: false
+          description: ""
+          sortKey: -1727118475319.156
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"email": "johndoe@jdoe.co",
+              "password": "TestUser123*"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.SERVER_ENDPOINT }}/auth/refresh-token"
+        name: Refresh Token
+        meta:
+          id: req_fc6571bccab34aa291cc43e33d629dd3
+          created: 1751769976206
+          modified: 1751772285287
+          isPrivate: false
+          description: ""
+          sortKey: -1727050306909.3372
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "refreshToken": ""
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.SERVER_ENDPOINT }}/auth/verify-otp-email"
+        name: Verify OTP Email
+        meta:
+          id: req_6657ac053bda4395a87b6f3b5e26b404
+          created: 1751769976208
+          modified: 1751772275893
+          isPrivate: false
+          description: ""
+          sortKey: -1727004662623.2341
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"type": "email", {# email | email_change #}
+              "email": "johndoe@jdoe.co",
+              "code": "680269"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.SERVER_ENDPOINT }}/auth/resend-otp-email"
+        name: Resend OTP Email
+        meta:
+          id: req_d737dfd4e2ae4b29a03e63618420b999
+          created: 1751769976209
+          modified: 1751772302861
+          isPrivate: false
+          description: ""
+          sortKey: -1726959018337.131
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"type": "signup",{# signup | email_change #}
+              "email": "johndoe@jdoe.co"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.SERVER_ENDPOINT }}/auth/change-email"
+        name: Change Email
+        meta:
+          id: req_87e8d5e87d284a859cb0ac77b1040744
+          created: 1751769976211
+          modified: 1751769976211
+          isPrivate: false
+          description: ""
+          sortKey: -1726933411857.504
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"email": "johndoe@jdoe.co",
+            	"accessToken": "",
+            	"refreshToken": ""
+            }	
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.SERVER_ENDPOINT }}/auth/change-password"
+        name: Change Password
+        meta:
+          id: req_b2de8f04d59c4eb6b7fe6530b3e5b5f4
+          created: 1751769976212
+          modified: 1751772329578
+          isPrivate: false
+          description: ""
+          sortKey: -1726920608617.6904
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"email": "johndoe@jdoe.co",
+            	"oldPassword": "TestUser123*",
+            	"newPassword": "TestJohnDoe*"
+            }	
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.SERVER_ENDPOINT }}/auth/change-phone"
+        name: Change Phone
+        meta:
+          id: req_311fe205a51a4ccabbf0e3ad19b339b8
+          created: 1751769976213
+          modified: 1751772313179
+          isPrivate: false
+          description: ""
+          sortKey: -1726927010237.5972
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"phone": "0412345678",
+            	"accessToken": "",
+            	"refreshToken": ""
+            }	
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Upload
+    meta:
+      id: fld_52ba9459ae3e4954bd30c5af52e070bf
+      created: 1751769976240
+      modified: 1751769976240
+      sortKey: -1671045237773.0547
+      description: ""
+    children:
+      - url: "{{ _.SERVER_ENDPOINT }}/upload/"
+        name: Upload
+        meta:
+          id: req_ba6af585a63a41efb1135e118c15454e
+          created: 1751769976241
+          modified: 1751772436638
+          isPrivate: false
+          description: ""
+          sortKey: -1729745696539
+        method: POST
+        body:
+          mimeType: multipart/form-data
+          params:
+            - id: pair_344997347c15447d98ce6d8748adf680
+              name: file
+              value: ""
+              description: ""
+              disabled: false
+              type: file
+        parameters:
+          - id: pair_23b38c55f1b24377a04e57f7aa445b54
+            name: userId
+            value: UUID
+            description: ""
+          - id: pair_92aef425141a494f8fc7790c62ce88bf
+            name: type
+            value: avatar | image | document
+            description: ""
+        headers:
+          - name: Content-Type
+            value: multipart/form-data
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - url: "{{ _.SERVER_ENDPOINT }}/health"
+    name: Health
+    meta:
+      id: req_e816a26e2f624631ac61b236752d0a58
+      created: 1751769976251
+      modified: 1751769976251
+      isPrivate: false
+      description: ""
+      sortKey: -1672883721974.6406
+    method: GET
+    headers:
+      - id: pair_10959dc0bb6d41b3b2057248c4b82eea
+        name: ""
+        value: ""
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_97d205908f6541a3aed892575176cfda
+    created: 1751769976197
+    modified: 1751769976197
+  cookies:
+    - key: __cf_bm
+      value: eoucItaLMQVdhd1cc8KMMeGpRpgk8fGHAeYw5D3B.aU-1708681817-1.0-AZwlVK2vrl6y/Roox5i6cx1cc7jCuX74Y+6H/QuDZbXy0eQRU3fU8pgnpFmwZ8m4l1u9KO16rt63pvcfgLZrCFo=
+      domain: onesignal.com
+      path: /
+      secure: true
+      httpOnly: true
+      extensions:
+        - SameSite=None
+      hostOnly: false
+      creation: 2024-02-23T09:50:17.688Z
+      lastAccessed: 2024-02-23T09:50:17.688Z
+      id: "8658804008531593"
+    - key: AWSALBTG
+      value: 9hPldAaMQsZduVNnSKbPxnkHRS8ii5Rwa7AvVy0XEtQCnp/1UTUbaPQD9S//9VUcOHs64j683hGr4tG22bn/GzB61P8EvpE+c1Cqgn0Y+uiH5ycVG/b0Aq/hFrptIRTV86s9hC3UQtElLNXpfFlSddSGc4V3vs3hI+4e0gHIVLm0ZMU6qNc=
+      domain: hooks.airtable.com
+      path: /
+      hostOnly: true
+      creation: 2024-09-11T09:28:26.467Z
+      lastAccessed: 2024-09-11T09:28:37.213Z
+      id: "17779003241011782"
+    - key: AWSALBTGCORS
+      value: 9hPldAaMQsZduVNnSKbPxnkHRS8ii5Rwa7AvVy0XEtQCnp/1UTUbaPQD9S//9VUcOHs64j683hGr4tG22bn/GzB61P8EvpE+c1Cqgn0Y+uiH5ycVG/b0Aq/hFrptIRTV86s9hC3UQtElLNXpfFlSddSGc4V3vs3hI+4e0gHIVLm0ZMU6qNc=
+      domain: hooks.airtable.com
+      path: /
+      secure: true
+      extensions:
+        - SameSite=None
+      hostOnly: true
+      creation: 2024-09-11T09:28:26.468Z
+      lastAccessed: 2024-09-11T09:28:37.213Z
+      id: "3717703442195841"
+    - key: AWSALB
+      value: N7kt3TmmfWOtgHPecLMzaSVRzZwFehCfVLUe03SlFhpyL+fShGuEiy4VYOL1bCUXfH/uWDriHf+XQGpEcdtfzaE8YxuTxEBNDOES64ixEbL0AksLxjjrOLTj18Pd
+      domain: hooks.airtable.com
+      path: /
+      hostOnly: true
+      creation: 2024-09-11T09:28:26.468Z
+      lastAccessed: 2024-09-11T09:28:37.213Z
+      id: "8467735845659699"
+    - key: AWSALBCORS
+      value: N7kt3TmmfWOtgHPecLMzaSVRzZwFehCfVLUe03SlFhpyL+fShGuEiy4VYOL1bCUXfH/uWDriHf+XQGpEcdtfzaE8YxuTxEBNDOES64ixEbL0AksLxjjrOLTj18Pd
+      domain: hooks.airtable.com
+      path: /
+      secure: true
+      extensions:
+        - SameSite=None
+      hostOnly: true
+      creation: 2024-09-11T09:28:26.468Z
+      lastAccessed: 2024-09-11T09:28:37.213Z
+      id: "42196976203563064"
+    - key: brw
+      value: brwpWyeciHybwlgl6
+      domain: airtable.com
+      path: /
+      secure: true
+      extensions:
+        - samesite=none
+      hostOnly: false
+      creation: 2024-09-11T09:28:26.468Z
+      lastAccessed: 2024-09-11T09:28:37.214Z
+      id: "8491493974025994"
+    - key: brwConsent
+      value: opt-in
+      domain: airtable.com
+      path: /
+      secure: true
+      extensions:
+        - samesite=none
+      hostOnly: false
+      creation: 2024-09-11T09:28:26.470Z
+      lastAccessed: 2024-09-11T09:28:37.214Z
+      id: "8820605672245643"
+    - key: AWSALB
+      value: PvVj59fahCNqM9sxRX1N+YAeK1hZ1ntE2nr6xz6UARCjdFpZYxp5Ci5KL9Rg8HL8jFkgbkUX4LV64eeV9m6qThI6BwacyYAiC8D9wzcUUTCXcLM3NKxjDNod3F5W
+      domain: jobs.smartrecruiters.com
+      path: /
+      hostOnly: true
+      creation: 2024-10-17T09:35:10.162Z
+      lastAccessed: 2024-10-17T09:40:35.912Z
+      id: "5271635941959358"
+    - key: AWSALBCORS
+      value: PvVj59fahCNqM9sxRX1N+YAeK1hZ1ntE2nr6xz6UARCjdFpZYxp5Ci5KL9Rg8HL8jFkgbkUX4LV64eeV9m6qThI6BwacyYAiC8D9wzcUUTCXcLM3NKxjDNod3F5W
+      domain: jobs.smartrecruiters.com
+      path: /
+      secure: true
+      extensions:
+        - SameSite=None
+      hostOnly: true
+      creation: 2024-10-17T09:35:10.163Z
+      lastAccessed: 2024-10-17T09:40:35.912Z
+      id: "2674009964373323"
+    - key: AWSALB
+      value: M8wfxe/HhlzNY2uyJYtlQPAYukqdgRMLZX+jDqfGxvL/jzHvKyRDwP6kiJCJ4Uw6fTZrEg5a+wwt1GAqkERj7/wyVMUHoGomngEEUR9TDabDGzpQsCe6mxlEDJbQ
+      domain: api.smartrecruiters.com
+      path: /
+      hostOnly: true
+      creation: 2024-10-17T09:39:40.088Z
+      lastAccessed: 2024-10-17T09:40:29.036Z
+      id: "4434692501218296"
+    - key: AWSALBCORS
+      value: M8wfxe/HhlzNY2uyJYtlQPAYukqdgRMLZX+jDqfGxvL/jzHvKyRDwP6kiJCJ4Uw6fTZrEg5a+wwt1GAqkERj7/wyVMUHoGomngEEUR9TDabDGzpQsCe6mxlEDJbQ
+      domain: api.smartrecruiters.com
+      path: /
+      secure: true
+      extensions:
+        - SameSite=None
+      hostOnly: true
+      creation: 2024-10-17T09:39:40.088Z
+      lastAccessed: 2024-10-17T09:40:29.036Z
+      id: "8553430955008572"
+    - key: __cf_bm
+      value: FNWBYpVrVzV8u_IGPbmBE.oe1bxWYam8JTpb1MwioeE-1737172988-1.0.1.1-X7x5Xvq0Y5NmeRFFDar1r1quDmcEnvk9E3nFcA8Ds2C.rP9J6EUQLZNcqTwUY2hJZG7gQP3qg1lQWeM0ptcy9w
+      domain: indeed.com
+      path: /
+      httpOnly: true
+      hostOnly: false
+      creation: 2025-01-17T14:59:29.652Z
+      lastAccessed: 2025-01-18T04:03:09.091Z
+      id: "35871659994243155"
+    - key: app
+      value: '"193.1,iPhone"'
+      maxAge: 157680000
+      domain: www.indeed.com
+      path: /m
+      extensions:
+        - Version=1
+      hostOnly: true
+      creation: 2025-01-17T15:07:39.496Z
+      lastAccessed: 2025-01-17T15:08:06.229Z
+      id: "1502130810823128"
+    - key: devid
+      value: '""'
+      domain: www.indeed.com
+      path: /m
+      hostOnly: true
+      creation: 2025-01-17T15:07:39.498Z
+      lastAccessed: 2025-01-17T15:08:06.229Z
+      id: "7735876718823889"
+    - key: CTK
+      maxAge: 0
+      domain: www.indeed.com
+      path: /
+      secure: true
+      extensions:
+        - SameSite=None
+      hostOnly: true
+      creation: 2025-01-17T15:07:39.499Z
+      lastAccessed: 2025-01-17T15:07:39.499Z
+      id: "15575644729390858"
+    - key: CTK
+      value: 1ihqcsd1sj2pe800
+      domain: indeed.com
+      path: /
+      hostOnly: false
+      creation: 2025-01-17T15:07:39.500Z
+      lastAccessed: 2025-01-17T16:02:23.896Z
+      id: "5790330720729098"
+    - key: mobnode
+      value: '""'
+      domain: indeed.com
+      path: /
+      hostOnly: false
+      creation: 2025-01-17T15:07:39.502Z
+      lastAccessed: 2025-01-18T04:03:09.092Z
+      id: "082282978553877"
+    - key: INDEED_CSRF_TOKEN
+      value: AfLXj3qem5drUKMWrH7vUEIIEJFovz9C
+      domain: www.indeed.com
+      path: /
+      secure: true
+      hostOnly: true
+      creation: 2025-01-17T15:07:39.503Z
+      lastAccessed: 2025-01-17T15:07:39.503Z
+      id: "735107331078803"
+    - key: LV
+      value: '"LA=1737126458:CV=1737126458:TS=1737126458"'
+      maxAge: 157680000
+      domain: www.indeed.com
+      path: /
+      extensions:
+        - Version=1
+      hostOnly: true
+      creation: 2025-01-17T15:07:39.503Z
+      lastAccessed: 2025-01-17T15:07:39.504Z
+      id: "2045142191434388"
+    - key: indeed_rcc
+      value: '"app:LV:CTK"'
+      maxAge: 157680000
+      domain: www.indeed.com
+      path: /
+      extensions:
+        - Version=1
+      hostOnly: true
+      creation: 2025-01-17T15:07:39.504Z
+      lastAccessed: 2025-01-17T15:08:06.230Z
+      id: "5361833578060771"
+    - key: fromJcsApply
+      value: '""'
+      domain: indeed.com
+      path: /
+      hostOnly: false
+      creation: 2025-01-17T15:07:39.504Z
+      lastAccessed: 2025-01-18T04:03:09.092Z
+      id: "3002427750119554"
+    - key: SHARED_INDEED_CSRF_TOKEN
+      value: AfLXj3qem5drUKMWrH7vUEIIEJFovz9C
+      domain: indeed.com
+      path: /
+      hostOnly: false
+      creation: 2025-01-17T15:07:39.504Z
+      lastAccessed: 2025-01-17T15:07:39.504Z
+      id: "3459287438473251"
+    - key: SAVED_JOB
+      value: '""'
+      domain: www.indeed.com
+      path: /
+      hostOnly: true
+      creation: 2025-01-17T15:07:39.505Z
+      lastAccessed: 2025-01-17T15:08:06.230Z
+      id: "015702721527884433"
+    - key: zalb_d1e4c9fc04
+      value: 1eba3b4143683e2f1666b7d6301fdacf
+      domain: nuyew.zohorecruit.eu
+      path: /
+      secure: true
+      httpOnly: true
+      hostOnly: true
+      creation: 2025-01-17T15:45:20.492Z
+      lastAccessed: 2025-01-17T15:45:20.492Z
+      id: "2622635511948259"
+    - key: crmcsr
+      value: 5798a3dc-56ff-42fb-a793-fd57d48721b1
+      domain: nuyew.zohorecruit.eu
+      path: /
+      secure: true
+      extensions:
+        - SameSite=None
+        - priority=high
+      hostOnly: true
+      creation: 2025-01-17T15:45:20.493Z
+      lastAccessed: 2025-01-17T15:45:20.493Z
+      id: "48892500719500886"
+    - key: _zcsr_tmp
+      value: 5798a3dc-56ff-42fb-a793-fd57d48721b1
+      domain: nuyew.zohorecruit.eu
+      path: /
+      secure: true
+      extensions:
+        - SameSite=Strict
+        - priority=high
+      hostOnly: true
+      creation: 2025-01-17T15:45:20.493Z
+      lastAccessed: 2025-01-17T15:45:20.493Z
+      id: "9435385239815359"
+    - key: app
+      value: '"193.1,iPhone"'
+      maxAge: 157680000
+      domain: malaysia.indeed.com
+      path: /m
+      extensions:
+        - Version=1
+      hostOnly: true
+      creation: 2025-01-17T16:02:23.895Z
+      lastAccessed: 2025-01-18T04:03:09.091Z
+      id: "12470311825245961"
+    - key: devid
+      value: '""'
+      domain: malaysia.indeed.com
+      path: /m
+      hostOnly: true
+      creation: 2025-01-17T16:02:23.895Z
+      lastAccessed: 2025-01-18T04:03:09.092Z
+      id: "08270776052646389"
+    - key: INDEED_CSRF_TOKEN
+      value: 2GTpMx7OWOuTlP09ZXbLVO5yhLdqJiim
+      domain: malaysia.indeed.com
+      path: /
+      secure: true
+      hostOnly: true
+      creation: 2025-01-17T16:02:23.895Z
+      lastAccessed: 2025-01-17T16:02:23.895Z
+      id: "2787118319419275"
+    - key: LV
+      value: '"LA=1737129743:CV=1737129743:TS=1737129743"'
+      maxAge: 157680000
+      domain: malaysia.indeed.com
+      path: /
+      extensions:
+        - Version=1
+      hostOnly: true
+      creation: 2025-01-17T16:02:23.895Z
+      lastAccessed: 2025-01-17T16:02:23.896Z
+      id: "5048765927972729"
+    - key: indeed_rcc
+      value: '"app:LV:CTK"'
+      maxAge: 157680000
+      domain: malaysia.indeed.com
+      path: /
+      extensions:
+        - Version=1
+      hostOnly: true
+      creation: 2025-01-17T16:02:23.896Z
+      lastAccessed: 2025-01-18T04:03:09.092Z
+      id: "08039603519598537"
+    - key: SAVED_JOB
+      value: '""'
+      domain: malaysia.indeed.com
+      path: /
+      hostOnly: true
+      creation: 2025-01-17T16:02:23.896Z
+      lastAccessed: 2025-01-18T04:03:09.093Z
+      id: "9124057871383979"
+environments:
+  name: Base Environment
+  meta:
+    id: env_2c75955bdebc4efaa16e1f8e7894bd41
+    created: 1751769976190
+    modified: 1751769976190
+    isPrivate: false
+  subEnvironments:
+    - name: Local
+      meta:
+        id: env_0f13996a3681431f8ffe1e7fc38b218a
+        created: 1751769976191
+        modified: 1751769976191
+        isPrivate: false
+        sortKey: 1698824438441
+      data:
+        SERVER_ENDPOINT: http://localhost:9000
+    - name: Development
+      meta:
+        id: env_139690eab03345408bf54f89eb868428
+        created: 1751769976194
+        modified: 1751770045595
+        isPrivate: false
+        sortKey: 1727429317554
+      data:
+        SERVER_ENDPOINT: https://stackfolio-node-mvc-dev-26461205929.australia-southeast1.run.app
+    - name: Production
+      meta:
+        id: env_a7786bcede134a2fa6f8be5817c6ddf2
+        created: 1751769990755
+        modified: 1751770040652
+        isPrivate: false
+        sortKey: 1727727268560
+      data:
+        SERVER_ENDPOINT: https://stackfolio-node-mvc-prod-26461205929.australia-southeast1.run.app

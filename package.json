@@ -1,0 +1,50 @@
+{
+  "name": "stackfolio-node-mvc-starter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier --write .",
+    "start": "node dist/index.js",
+    "build": "NODE_ENV=production npx tsc",
+    "dev": "NODE_ENV=development concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\""
+  },
+  "keywords": [],
+  "author": "kaiz16",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.1.4",
+    "prettier": "^3.3.3"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.4",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/multer": "^1.4.12",
+    "@types/node": "^22.1.0",
+    "@types/uuid": "^10.0.0",
+    "axios": "^1.7.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "graphql-tag": "^2.12.6",
+    "http-status": "^1.7.4",
+    "jwt-decode": "^4.0.0",
+    "libphonenumber-js": "^1.11.20",
+    "multer": "^1.4.5-lts.1",
+    "p-limit": "^6.1.0",
+    "typescript": "^5.5.4",
+    "uuid": "^11.0.2"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "public/*"
+    ]
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
