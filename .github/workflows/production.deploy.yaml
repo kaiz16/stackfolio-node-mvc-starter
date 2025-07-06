@@ -40,7 +40,7 @@ jobs:
 
       - name: Build Docker Image
         run: |-
-          docker buildx build \
+          docker build \
           --build-arg NODE_ENV=${{ env.NODE_ENV }} \
           --build-arg SUPABASE_URL=${{ env.SUPABASE_URL }} \
           --build-arg SUPABASE_ANON_KEY=${{ env.SUPABASE_ANON_KEY }} \
@@ -48,7 +48,7 @@ jobs:
           --build-arg RESEND_API_KEY=${{ env.RESEND_API_KEY }} \
           --build-arg HASURA_ENDPOINT=${{ env.HASURA_ENDPOINT }} \
           --build-arg HASURA_ADMIN_SECRET=${{ env.HASURA_ADMIN_SECRET }} \
-          -t ${{ env.REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE }}:${{ github.sha }} \
+          -t ${{ env.REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE }}:${{ github.sha }} -f ${{ env.DOCKERFILE }} .
 
       - name: Push to Artifact Registry
         run: |-
