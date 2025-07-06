@@ -40,7 +40,7 @@ jobs:
 
       - name: Build Docker Image
         run: |-
-          docker build \
+          docker buildx build \
           --build-arg NODE_ENV=${{ env.NODE_ENV }} \
           --build-arg SUPABASE_URL=${{ env.SUPABASE_URL }} \
           --build-arg SUPABASE_ANON_KEY=${{ env.SUPABASE_ANON_KEY }} \
